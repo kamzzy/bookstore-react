@@ -6,9 +6,9 @@ const NewBook = () => (
     <form>
       <input type="text" placeholder="Book title" />
       <select>
-        <option>Category</option>
-        <option>Category 1</option>
-        <option>Category 2</option>
+        <option>Author</option>
+        <option>Author 1</option>
+        <option>Author 2</option>
       </select>
       <button type="button" className="addBookBtn">ADD BOOK</button>
     </form>
