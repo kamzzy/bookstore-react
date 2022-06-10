@@ -1,7 +1,7 @@
 # Book Store 
 ### An app for book lovers
 ## Deployed version
-* []()
+<!-- * []() -->
  ***
 ## Built With
 * React
