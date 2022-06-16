@@ -41,6 +41,7 @@ const NewBook = () => {
           name="author"
           onChange={onChangeHandler}
         >
+          <option>Select Author</option>
           <option name="author1">Author1</option>
           <option name="author2">Author2</option>
           <option name="author2"> Author3</option>

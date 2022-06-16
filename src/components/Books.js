@@ -1,5 +1,4 @@
 import React from 'react';
-import { CgSpinner } from 'react-icons/cg';
 import { useSelector, useDispatch } from 'react-redux';
 import NewBook from './NewBook';
 import { removeBook } from '../redux/books/books';
@@ -27,7 +26,7 @@ const Books = () => {
                 <button type="button" className="edit">Edit</button>
               </div>
               <div className="col-2">
-                <CgSpinner className="spinner" />
+                <div className="spinner" />
                 <span className="percentComplete">64%</span>
                 <span className="completed">Completed</span>
               </div>
