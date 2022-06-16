@@ -3,17 +3,22 @@ import { useDispatch } from 'react-redux';
 import { addBook } from '../redux/books/books';
 
 const NewBook = () => {
-  const [titleValue, setTitleValue] = useState('');
-  const [authorValue, setAuthorValue] = useState('');
+  const [value, setValue] = useState({
+    title: '',
+    author: '',
+  });
+  const onChangeHandler = (e) => {
+    setValue({ ...value, [e.target.name]: e.target.value });
+  };
   const dispatch = useDispatch();
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    if (titleValue && authorValue) {
+  const onSubmit = (event) => {
+    event.preventDefault();
+    if (value) {
       dispatch(
         addBook({
-          title: titleValue,
-          author: authorValue,
+          title: value,
+          author: value,
         }),
       );
     }
@@ -25,31 +30,16 @@ const NewBook = () => {
         <input
           type="text"
           placeholder="Book title"
-          value={titleValue}
-          onChange={(e) => setTitleValue(e.target.value)}
+          name="title"
+          onChange={onChangeHandler}
         />
-        <select name="authors">
-          <option
-            value={authorValue}
-            onChange={(e) => setAuthorValue(e.target.value)}
-          >
-            Author1
-
-          </option>
-          <option
-            value={authorValue}
-            onChange={(e) => setAuthorValue(e.target.value)}
-          >
-            Author2
-
-          </option>
-          <option
-            value={authorValue}
-            onChange={(e) => setAuthorValue(e.target.value)}
-          >
-            Author3
-
-          </option>
+        <select
+          name="author"
+          onChange={onChangeHandler}
+        >
+          <option name="author1">Author1</option>
+          <option name="author2">Author2</option>
+          <option name="author2"> Author3</option>
         </select>
         <button type="button" className="addBookBtn">ADD BOOK</button>
       </form>
