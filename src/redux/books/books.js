@@ -1,34 +1,37 @@
+import { v4 as uuidv4 } from 'uuid';
+
 const ADD_BOOK = 'bookStore/books/ADD_BOOK';
 const REMOVE_BOOK = 'bookStore/books/REMOVE_BOOK';
 
-const initialState = [];
+const initialState = [
+  { bookId: uuidv4(), title: 'title1', author: 'author1' },
+  { bookId: uuidv4(), title: 'title2', author: 'author2' },
+  { bookId: uuidv4(), title: 'title3', author: 'author3' },
+  { bookId: uuidv4(), title: 'title4', author: 'author4' },
+];
 
-export const addbook = (title, author) => ({
+export const addBook = (book) => ({
   type: ADD_BOOK,
-  bookId: Date.now(),
-  title,
-  author,
+  payload: book,
 });
 
-export const removeBook = (bookId) => ({
+export const removeBook = (book) => ({
   type: REMOVE_BOOK,
-  bookId,
+  payload: book,
 });
 
 /// /// Reducers
 
 const bookReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ADD_BOOK:
+      return [...state,
+        action.payload,
+      ];
+    case REMOVE_BOOK:
+      return state.filter((book) => book.bookId !== action.payload.bookId);
     default:
       return state;
-    case ADD_BOOK:
-      return [...state, {
-        bookId: action.bookId,
-        title: action.title,
-        author: action.author,
-      }];
-    case REMOVE_BOOK:
-      return state.filter((book) => book.bookId !== action.bookId);
   }
 };
 
