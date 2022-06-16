@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 import { addBook } from '../redux/books/books';
 
 const NewBook = () => {
@@ -7,19 +8,22 @@ const NewBook = () => {
     title: '',
     author: '',
   });
+  const { title, author } = value;
+  const dispatch = useDispatch();
+
   const onChangeHandler = (e) => {
     setValue({ ...value, [e.target.name]: e.target.value });
   };
-  const dispatch = useDispatch();
-
-  const onSubmit = (event) => {
-    event.preventDefault();
+  const onSubmit = (e) => {
+    e.preventDefault();
     if (value) {
+      const newBook = {
+        bookId: uuidv4(),
+        title,
+        author,
+      };
       dispatch(
-        addBook({
-          title: value,
-          author: value,
-        }),
+        addBook(newBook),
       );
     }
   };
@@ -41,7 +45,7 @@ const NewBook = () => {
           <option name="author2">Author2</option>
           <option name="author2"> Author3</option>
         </select>
-        <button type="button" className="addBookBtn">ADD BOOK</button>
+        <button type="submit" className="addBookBtn">ADD BOOK</button>
       </form>
     </div>
   );
