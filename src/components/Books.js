@@ -1,23 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import NewBook from './NewBook';
-import { removeBook } from '../redux/books/books';
+import { removeAbook, fetchBooks } from '../redux/books/books';
 
 const Books = () => {
   const books = useSelector((state) => state.books);
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchBooks());
+  }, []);
 
   const handleDeleteClick = (book) => {
-    dispatch(removeBook(book));
+    dispatch(removeAbook(book));
   };
 
   return (
     <div className="grid">
       {books.map((book) => (
-        <div className="row gy-4" key={book.bookId}>
+        <div className="row gy-4" key={book.item_id}>
           <div className="displayCol col-12">
             <div className="colRow row">
-              <span className="genre">Action</span>
+              <span className="genre">{book.category}</span>
               <div className="col-8">
                 <h3 className="title">{book.title}</h3>
                 <span className="author">{book.author}</span>

@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import { addBook } from '../redux/books/books';
+import { addNewBook } from '../redux/books/books';
 
 const NewBook = () => {
   const [value, setValue] = useState({
+    item_id: '',
     title: '',
     author: '',
+    category: 'Action',
   });
-  const { title, author } = value;
+  const { title, author, category } = value;
   const dispatch = useDispatch();
 
   const onChangeHandler = (e) => {
@@ -18,12 +20,13 @@ const NewBook = () => {
     e.preventDefault();
     if (value) {
       const newBook = {
-        bookId: uuidv4(),
+        item_id: uuidv4(),
         title,
         author,
+        category,
       };
       dispatch(
-        addBook(newBook),
+        addNewBook(newBook),
       );
     }
   };
