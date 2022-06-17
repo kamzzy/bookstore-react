@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 import NewBook from './NewBook';
 import { removeAbook, fetchBooks } from '../redux/books/books';
 
@@ -13,7 +15,7 @@ const Books = () => {
   const handleDeleteClick = (book) => {
     dispatch(removeAbook(book));
   };
-
+  const percentage = 68;
   return (
     <div className="grid">
       {books.map((book) => (
@@ -29,8 +31,15 @@ const Books = () => {
                 <button type="button" className="edit">Edit</button>
               </div>
               <div className="col-2">
-                <div className="spinner" />
-                <span className="percentComplete">64%</span>
+                <div className="row">
+                  <div className="col-6 spins">
+                    <CircularProgressbar value={percentage} />
+                  </div>
+                  <span className="percentComplete col-6">
+                    {percentage}
+                    %
+                  </span>
+                </div>
                 <span className="completed">Completed</span>
               </div>
               <div className="readingPosition col-2">
